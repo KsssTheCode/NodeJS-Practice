@@ -1,0 +1,18 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="centered">
+        <h1><%= product.title %></h1>
+        <hr>
+        <div>
+            <img src="<%= product.imageUrl %>" alt="<%= product.title %>"
+        </div>
+        <h2><%= product.price %></h2>
+        <p><%= product.description %></p>
+        <!--post form에도 action속성에 매개변수를 제시할 수 있지만, 굳이 할 필요 없음-->
+        <%- include('../includes/add-to-cart.ejs') %>
+    </main>
+    <%- include('../includes/end.ejs') %>

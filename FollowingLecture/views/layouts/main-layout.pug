@@ -1,0 +1,26 @@
+// pug엔진은 최소한의 HTML만 사용하기때문에 html:5 입력 시 아래 구문(최소한의 HTML구문)을 제공해주고,
+// 마지막에 HTML로 컴파일 한 후 서비스하게됨
+
+// 또한 기존의 tag명을 입력한 후 tab키를 누르면 pug기반의 구문을 자동으로 완성해줌
+
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{pageTitle}
+        link(rel="stylesheet", href="/css/main.css")
+        //block 입력 시, 동적으로 입력할 수 있는 공간을 생성함
+        block styles 
+    body
+        //태그명.클래스명#아이디(속성명="속성값", 속성명="속성값", ..)
+        //띄어쓰기 없이 작성해야 태그 및 속성들로 간주되며, 입력내용은 띄어쓰기 후 작성
+        header.main-header 
+            nav.main-header__nav    
+                ul.main-header__item-list
+                    li.main-header__item
+                        a(href="/", class=(path==='/' ? 'active' : '')) Shop 
+                    li.main-header__item
+                        a(href="/admin/add-product", class=(path==='/admin/add-product' ? 'active' : '')) Add Prodcut 
+        block content

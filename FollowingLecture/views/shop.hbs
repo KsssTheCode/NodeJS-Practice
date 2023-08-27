@@ -1,0 +1,30 @@
+<main>
+    <!-- block statement : 내용물 단순출력이 아닌, 조건문(if,for)의 내용물을 감싸주는 역할 
+                            : handlebar에서는 if문에서 true혹은 false를 출력하는 키만 지원 
+                            따라서, 단일속성 또는 단일변수의 값만 출력 가능
+                                    (pug와 다르게 handlebar파일에서 논리실행 불가)
+                            이렇게 모든 논리를 express코드로 적용시킴으로써 가독성 향상 -->
+    {{#if hasProducts }}
+        <div class="grid">
+            {{#each prods}}
+                <article class="card product-item">
+                    <header class="card__header">
+                        <h1 class="product__title">{{this.title}}</h1>
+                    </header>
+                    <div class="card__image">
+                        <img src="https://media.gettyimages.com/id/157482029/photo/stack-of-books.jpg?s=1024x1024&w=gi&k=20&c=LBkfIEzmAzb8Dt7u1Yo0U_TX0d4YWoGexSscX71Z5Ng=" alt="A Book">
+                    </div>
+                    <div class="card__content">
+                        <h2 class="product__price">$19.99</h2>
+                        <p class="product__description">A very interesting book about so many even more interesting things!</p>
+                    </div>
+                    <div class="card__actions">
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </article>
+            {{/each}}
+        </div>
+    {{else}}
+        <h1>No Products Found!</h1>
+    {{/if}}
+</main>

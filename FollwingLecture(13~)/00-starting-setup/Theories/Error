@@ -1,0 +1,75 @@
+오류코드
+* 상태코드가 앱의 충돌의 의미하는 것이 아님
+
+* 1XX (Send data) : 정보전달
+  - 100 Continue
+  - 101 Switching Protocols
+  - 102 Processing
+
+* 2XX (Success) : 작동이 성공했음을 나타냄
+  - 200 OK
+  - 201 Created
+  - 202 Accepted
+  - 203 Non-authoritative Information 
+  - 204 No Content
+  - 205 Reset Content
+  - 206 Partial Content
+  - 207 Multi-Status
+  - 208 Already Reported
+  - 226 IM Used
+
+* 3XX (Redirect) : Redirection이 발생했음을 나타냄
+  - 300 Multiple Choices
+  - 301 : 영구 혹은 임시로 화면을 이동하였음을 알려주는 용도
+  - 302 Found
+  - 303 See Other
+  - 304 Not Modified
+  - 305 Use Proxy
+  - 307 Temporary Redirect
+  - 308 Permanent Redirect
+
+* 4XX (Client-side Error) : Client-side에서의 문제가 발생했음을 나타냄
+  - 400 Bad Request
+  - 401 : 인증이 되지 않았을 경우 발생
+  - 402 Payment Required
+  - 403 : 권한이 없을 경우 발생 (특정 작동에 대해 인증은 되었으나 실행이 허용되지 않음)
+  - 404 : Page not found
+  - 405 Method Not Allowed
+  - 406 Not Acceptable
+  - 407 Proxy Authentication Required
+  - 408 Request Timeout
+  - 409 Conflict 
+  - 410 Gone
+  - 411 Length Required
+  - 412 Precondition Failed 
+  - 413 Payload Too Large
+  - 414 Request-URI Too Long
+  - 415 Unsupported Media Type
+  - 416 Requested Range Not Satisfiable
+  - 417 Expectation Failed
+  - 418 I'm a teapot
+  - 421 Misdirected Request
+  - 422 : 잘못된 형식의 데이터가 입력된 경우 qkftod
+  - 423 Locked
+  - 424 Failed Dependency
+  - 426 Upgrade Required
+  - 428 Precondition Required
+  - 429 Too Many Requests
+  - 431 Request Header Fields Too Large
+  - 444 Connection Closed Without Response
+  - 451 Unavailable For Legal Reasons
+  - 499 Client Closed Request
+
+* 5XX (Server-side Error) : Server-side에서의 문제가 발생했음을 나타냄
+  - 500 : 요청 시간 초과에 대해 다른 코드들이 있음을 알리는 용도
+  - 501 Not Implemented
+  - 502 Bad Gateway
+  - 503 Service Unavailable
+  - 504 Gateway Timeout
+  - 505 HTTP Version Not Supported
+  - 506 Variant Also Negotiates
+  - 507 Insufficient Storage
+  - 508 Loop Detected
+  - 510 Not Extended
+  - 511 Network Authentication Required
+  - 599 Network Connect Timeout Error

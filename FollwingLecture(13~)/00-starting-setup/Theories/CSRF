@@ -1,0 +1,33 @@
+CSRF Attacks (Cross-Site Request Forgery) : 사이트 간 요청 위조
+    - 세션을 악용하거나, 애플리케이션 사용자를 속여 악성코드를 실행하도록(abuse)하는 특수 공격방법 또는 접근법 
+    - 공격과정
+      1. 이메일이나 링크를 보내는 등 사용자를 속여 Fake Site(원본페이지와 유사)로 유도하여 중간에 악성코드 주입
+      2. 사용자를 원본사이트로 이동시켜 원래의 과정 수행(송금, 쇼핑, ..)
+      3. 악성코드를 이용하여 사용자에 대한 세션 추출
+    - 방어법 : CSRF토큰 사용
+
+CSRF토큰
+    - 사용자가 특정 세션을 내가 배포한 어플리케이션이 렌더링한 뷰로만 작업을 수행할 때에만 사용가능하도록 하는 방법
+    - npm install --save csurf (Express.js용 패키지)로 다운로드
+    - 토큰은 백엔드에서 실행되어 보호가 필요하거나, 사용자의 상태를 변경하는 등의 민감한 작업을 수행하여 폼이나 페이지에 내장시킴
+      토큰은 무작위 해시값을 가지게 되어 추측이 불가하고, 렌더링되는 페이지마다 생성되므로 가로챌 수도 없음
+      뷰에 토큰을 포함시켜 해당 패키지로 하여금 들어오는 요청이 유효한 토큰을 가지고 있는지 검사하게됨
+
+      가짜 사이트에서 벡엔드로 요청을 보내 세션을 사용 가능하지만, 토큰은 하나의 유효값(무작위 해시값)만 가지고 있기 때문에 일치하지 않다면 세션을 가로챌 수 없음
+      
+    - CSRF토큰은 POST방식의 전송에 대해서만 해당 뷰(req.body)가 CSRF토큰을 가지고 있는지 검사
+      따라서, 해당 보안이 필요한 페이지의 경우 req.csrfToken()을 담아 렌더링하고, 뷰에서 사용할 땐 input hidden에 csrfToken을 담아 저장 및 사용하도록 해야함
+
+    - 사용방법
+      1. npm install --save csurf로 패키지 다운로드
+      2. 사용하고자하는 JS파일에 import (app.js -> const scrfToken = require('csurf');)
+      3. 선언한 변수(scrfToken)을 바탕으로 scrfToken 설정 및 발행 (app.js -> const csrfProtection = csrfToken({설정값});)
+      4. 미들웨로 등록 (app.js -> app.use(csrfProtection);)
+      5. 토큰이 사용될 뷰에 rendering시 함께 함수로써 전달 (토큰명 : scrfToken();)
+         => 각 부분에 넣기보다, 메인 실행파일에서 미들웨어로 등록하여 지역변수로 뿌리기(locals: 뷰에 입력할 로컬변수(렌더링될 뷰에만 존재함)를 설정할 수 있도록 함)
+            ex: app.use((req, res, next) => {
+                    res.locals.isAuthenticated = req.session.isLoggedIn;
+                    res.locals.csrfToken = req.session.csrfToken();
+                    next();
+                }) 
+      6. 필요한 뷰에 토큰 값 주입 (name값은 _csrf로 고정) (input type="hidden" name="_csrf" value="<%= scrfToken %>")
